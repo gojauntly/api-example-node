@@ -46,6 +46,7 @@ class GoJauntlyApi {
     }
 
     async apiCall(url, method, data = null) {
+        this.refreshTokenIfNeeded();
         const fullUrl = `${BASE_API}${url}`;
         const headers = {
             Authorization: `Bearer ${this.token}`
@@ -88,27 +89,22 @@ class GoJauntlyApi {
     }
 
     async curatedWalkSearch(data) {
-        this.refreshTokenIfNeeded();
         return await this.apiCall('/curated-walks/search', HttpMethod.POST, data);
     }
 
     async curatedWalkRetrieve(id, data) {
-        this.refreshTokenIfNeeded();
         return await this.apiCall(`/curated-walks/${id}`, HttpMethod.POST, data);
     }
 
     async dynamicRoutesRoute(data) {
-        this.refreshTokenIfNeeded();
         return await this.apiCall('/routing/route', HttpMethod.POST, data);
     }
 
     async dynamicRoutesCircular(data) {
-        this.refreshTokenIfNeeded();
         return await this.apiCall('/routing/circular', HttpMethod.POST, data);
     }
 
     async dynamicRoutesCircularCollection(data) {
-        this.refreshTokenIfNeeded();
         return await this.apiCall('/routing/circular/collection', HttpMethod.POST, data);
     }
 }
